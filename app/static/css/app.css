@@ -1,3 +1,48 @@
 body {
     padding-top: 5rem;
+    background-color: aliceblue;
+}
+
+button {
+    background-color: #0093f5; /* Green */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.form{
+    border: white solid;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.form-group{
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.Mydiv{
+    display: grid;
+    grid-template-rows: auto auto;
+    padding: 10px;
+}
+
+.grid-item{
+    width: 100%;
+    display: flexbox;
+    border: solid black; 
+    padding: 10px;
+    background-color: white;
+}
+
+.container1{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    /* padding: 10px; */
+    grid-gap: 10px;
 }

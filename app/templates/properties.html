@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block main %}
+<h1>Properties</h1>
+{% include 'flash_messages.html' %}
+<div class="container1">
+
+{% for user in properties %}
+<div class="">
+	<div class="grid-item">
+		<img src="{{ url_for('get_image', filename=user.photo)}}" style="width:100%; height:150px;"/>
+		<h4>{{ user.description}}</h4>
+		<p class="box-text"><span class="">{{ user.location }}</span></p>
+		<p class="box-text"><span class="">${{ user.price }}</span></p>
+		<a href=""><input type="button" class="btn" value="View Properties"/></a>
+	</div>
+</div>
+{% endfor %}
+</div>
+
+{% endblock %}

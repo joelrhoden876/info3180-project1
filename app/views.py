@@ -5,8 +5,12 @@ Werkzeug Documentation:  https://werkzeug.palletsprojects.com/
 This file contains the routes for your application.
 """
 
-from app import app
-from flask import render_template, request, redirect, url_for
+import os 
+from app import app, db
+from flask import render_template, request, redirect, url_for, flash, send_from_directory
+from werkzeug.utils import secure_filename
+from app.forms import PropertyForm
+from app.models import Property
 
 
 ###
@@ -22,12 +26,64 @@ def home():
 @app.route('/about/')
 def about():
     """Render the website's about page."""
-    return render_template('about.html', name="Mary Jane")
+    return render_template('about.html', name="Joel Rhoden")
 
+@app.route('/properties/create', methods=['GET', 'POST']) #3.3
+def create_property():
+    form = PropertyForm()
+    if form.validate_on_submit():
+        title = form.title.data
+        description = form.description.data
+        rooms = form.rooms.data
+        bathrooms = form.bathrooms.data
+        price = form.price.data
+        type = form.type.data
+        location = form.location.data
+        photo = request.files['photo']
+        filename = secure_filename(photo.filename)
+        photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        property = Property(title=title, description=description, rooms=rooms, bathrooms=bathrooms, price=price, location=location, type=type, photo=filename )
+        db.session.add(property)
+        db.session.commit()
+        
+        property_listing = Property.query.all()
+        flash('Property Successfully Added!')
+        return redirect(url_for('properties', properties = property_listing))
+        # return render_template('newproperty.html', form = form)
+    flash_errors(form)
+    """Render the website's contact form."""
+    return render_template('newproperty.html', form = form)
+
+@app.route('/properties', methods=['POST', 'GET'])
+def properties():
+    property_listing = Property.query.all()
+    filename = get_uploaded_images()
+    return render_template('properties.html', properties = property_listing) 
+
+# @app.route('/property/<propertyid>')
+# def propertyid(propertyid):
+#     propertyid=PropertyMod.query.get(propertyid)
+#     return render_template('propertyid.html', propertyid=propertyid)
+
+@app.route("/image/<filename>")
+def get_image(filename):
+    return send_from_directory(os.path.join(os.getcwd(), app.config['UPLOAD_FOLDER']), filename)
 
 ###
 # The functions below should be applicable to all Flask apps.
 ###
+
+def get_uploaded_images():
+    root_dir = os.getcwd()
+    temp=[]
+    for subdir, dirs, files in os.walk(root_dir + '/uploads'): 
+        for file in files:
+            filename = file 
+            temp.append(filename)
+    return temp
+
+def get_image(filename):
+    return send_from_directory(os.path.join(os.getcwd(), app.config['UPLOAD_FOLDER']), filename)
 
 # Display Flask WTF errors as Flash messages
 def flash_errors(form):

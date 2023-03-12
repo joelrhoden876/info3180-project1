@@ -60,10 +60,10 @@ def properties():
     filename = get_uploaded_images()
     return render_template('properties.html', properties = property_listing) 
 
-# @app.route('/property/<propertyid>')
-# def propertyid(propertyid):
-#     propertyid=PropertyMod.query.get(propertyid)
-#     return render_template('propertyid.html', propertyid=propertyid)
+@app.route('/property/<propertyid>')
+def propertyid(propertyid):
+    property= Property.query.filter_by(id=propertyid).first()
+    return render_template('property.html', property=property)
 
 @app.route("/image/<filename>")
 def get_image(filename):

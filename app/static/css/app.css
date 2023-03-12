@@ -3,6 +3,9 @@ body {
     background-color: aliceblue;
 }
 
+header{
+    background-color: #58D68D;
+}
 button {
     background-color: #0093f5; /* Green */
     border: none;
@@ -36,9 +39,46 @@ button {
     width: 300px;
     /* height: 450px; */
     display: flexbox;
-    border: solid black; 
+    border-color: whitesmoke;
+    box-shadow: 8px 5px #D3D3D3; 
+    /* border-color: whitesmoke; */
+    /* padding: 10px; */
+    background-color: white;
+    border-radius: 10px;
+}
+
+.grid-item2{
+    width: 100%;
+    min-height: 359px;
+    max-height: fit-content;
+    /* align-items: center; */
+    /* height: 450px; */
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 60% auto;
+    border-color: whitesmoke;
+    box-shadow: 8px 5px #D3D3D3; 
+    /* border-color: whitesmoke; */
     padding: 10px;
     background-color: white;
+    border-radius: 10px;
+}
+
+.image{
+    height: 100%;
+}
+
+.grid-group{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.grid-group2{
+    display: inline-flex;
+    
+    /* grid-template-columns: auto auto;
+    text-align: left; */
 }
 
 .container1{
@@ -46,4 +86,52 @@ button {
     grid-template-columns: auto auto auto;
     /* padding: 10px; */
     grid-gap: 10px;
+}
+
+.container{
+    width: 70%;
+    position: relative;
+    
+}
+
+
+.rview{
+    background-color: #1E90FF ;
+    color: white;
+    text-align: center;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+}
+
+.info{
+    padding: 10px;
+}
+
+.price{
+    background-color: #00BFFF;
+    color: white;
+    border: solid #00BFFF;
+    border-radius: 15px;
+    width: 100px;
+    text-align: center;
+    margin-right: 6px;
+}
+
+.type{
+    background-color: #ffc800;
+    color: white;
+    border: solid #ffc800;
+    border-radius: 15px;
+    width: 100px;
+    text-align: center;
+}
+
+.location{
+    color: grey;
+    margin-right: 6px;
+}
+
+.property{
+    align-items: center;
 }

@@ -10,14 +10,14 @@ class Property(db.Model):
     __tablename__ = 'property_listing'
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(80))
-    description = db.Column(db.String(80))
+    title = db.Column(db.String)
+    description = db.Column(db.String)
     rooms = db.Column(db.Integer)
     bathrooms = db.Column(db.Integer)
     price = db.Column(db.Integer)
-    location = db.Column(db.String(50))
-    type = db.Column(db.String(20))
-    photo = db.Column(db.String(120))
+    location = db.Column(db.String)
+    type = db.Column(db.String)
+    photo = db.Column(db.String)
         
 
 
